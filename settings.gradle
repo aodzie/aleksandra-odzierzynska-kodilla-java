@@ -9,4 +9,5 @@ include 'kodilla-exception'
 include 'kodilla-testing'
 include 'kodilla-rps'
 include 'kodilla-stream'
+include 'kodilla-jdbc'
 
