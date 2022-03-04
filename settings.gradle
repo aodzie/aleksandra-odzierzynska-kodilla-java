@@ -10,4 +10,4 @@ include 'kodilla-testing'
 include 'kodilla-rps'
 include 'kodilla-stream'
 include 'kodilla-jdbc'
-
+include 'kodilla-hibernate'
