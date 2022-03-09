@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -51,12 +53,39 @@ class CompanyDaoTestSuite {
         assertNotEquals(0, greyMatterId);
 
         //CleanUp
-        //try {
-        //    companyDao.deleteById(softwareMachineId);
-        //    companyDao.deleteById(dataMaestersId);
-        //    companyDao.deleteById(greyMatterId);
-        //} catch (Exception e) {
-        //    //do nothing
-        //}
+        try {
+            companyDao.deleteById(softwareMachineId);
+           companyDao.deleteById(dataMaestersId);
+           companyDao.deleteById(greyMatterId);
+        } catch (Exception e) {
+            //do nothing
+        }
+    }
+
+    @Test
+    public void testNamesQuariesCompany(){
+        //Given
+        Company firstCompany = new Company("FirstCompany");
+        Company secondCompany = new Company("SecondCompany");
+
+        companyDao.save(firstCompany);
+        int firstCompanyID = firstCompany.getId();
+
+        companyDao.save(secondCompany);
+        int secondCompanyID = secondCompany.getId();
+
+        //When
+        List<Company> companies = companyDao.retrieveWithThreeFirstLetters("Fir");
+
+        //Then
+        assertEquals(1, companies.size());
+
+        //Cleanup
+        try {
+            companyDao.deleteById(firstCompanyID);
+            companyDao.deleteById(secondCompanyID);
+        } catch (Exception e) {
+            //do nothing
+        }
     }
 }
